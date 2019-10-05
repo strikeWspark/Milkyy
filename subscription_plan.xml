@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/mky_plan_300ml"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="14dp"
+            android:paddingTop="14dp"
+            android:layout_margin="12dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mky_pay_for_300ml_subscription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/mky_300ml"
+                android:layout_margin="12dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/mky_pay_for_500ml_subscription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mky_500ml"
+                android:layout_alignParentLeft="true"
+                android:layout_margin="12dp"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+
+</ScrollView>
