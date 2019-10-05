@@ -14,9 +14,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/mky_Home_toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:padding="12dp"
-            app:contentInsetStart="0dp"
+            android:layout_height="wrap_content"
             app:title="@string/app_name"/>
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -28,11 +26,40 @@
         android:textSize="22sp"
         />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/mky_left_days_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="100dp"
+            android:padding="14dp"
+            android:text="62"
+            android:textSize="150dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mky_days_left"
+            android:layout_toRightOf="@+id/mky_left_days_display"
+            android:layout_alignBottom="@+id/mky_left_days_display"
+            android:layout_marginBottom="25dp"
+            android:textSize="18sp"
+            android:textStyle="bold|italic"
+            />
+
+    </RelativeLayout>
+
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mky_subscriptionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/mky_subscription"
+        android:textColor="@android:color/background_dark"
         android:layout_marginLeft="135dp"/>
 
 </LinearLayout>

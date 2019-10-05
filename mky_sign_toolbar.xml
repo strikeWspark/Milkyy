@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/about_us"
+        android:id="@+id/mky_sign_about_us"/>
+    <item
+        android:title="@string/mky_terms_and_condition"
+        android:id="@+id/mky_terms_condition"/>
+
+
+
+
+</menu>

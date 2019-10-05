@@ -2,6 +2,7 @@ package com.dryfire.milkyy.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.view.Menu;
@@ -57,6 +58,14 @@ public class Sign_up extends AppCompatActivity {
 
         Toolbar sign_toolbar = (Toolbar) findViewById(R.id.mky_signup_toolbar);
         setSupportActionBar(sign_toolbar);
+
+        sign_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Sign_up.this,MainActivity.class));
+                finish();
+            }
+        });
 
         String []hostelsnames = {"Boys Hostel - 1","Boys Hostel  - 2","Boys Hostel - 3","Boys Hostel - 4","Boys Hostel - 5","Boys Hostel - 6","Boys Hostel - 7","Boys Hostel - 8",
                 "Girls Hostel - 1","Girls Hostel - 2","Girls Hostel - 3","Girls Hostel - 4","Girls Hostel - 5","Girls Hostel - 6"};
