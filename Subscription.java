@@ -15,13 +15,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.dryfire.milkyy.R;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
 public class Subscription extends AppCompatActivity {
 
     Button send;
-    EditText noteEt;
+    TextInputEditText noteEt;
     final int UPI_PAYMENT = 0;
     String am;
 
@@ -49,6 +50,7 @@ public class Subscription extends AppCompatActivity {
 
     void initializeViews() {
         send = findViewById(R.id.send);
+        noteEt = findViewById(R.id.note);
         String note = noteEt.getText().toString();
     }
     void payUsingUpi(String amount, String upiId, String name, String note) {

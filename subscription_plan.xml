@@ -24,11 +24,11 @@
 
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/mky_pay_for_300ml_subscription"
+                android:id="@+id/mky_pay_for_350ml_subscription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="@string/mky_300ml"
+                android:text="@string/mky_350ml"
                 android:layout_margin="12dp" />
 
             <com.google.android.material.button.MaterialButton

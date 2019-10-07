@@ -6,6 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import android.text.Editable;
+import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -111,6 +114,15 @@ public class Sign_up extends AppCompatActivity {
 
             }
         });
+        password_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (isPasswordValid(password_edit.getText())) {
+                    password_input.setError(null);
+                }
+                return false;
+            }
+        });
         milkyy=new Milkyy();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Milkyy");
 
@@ -119,8 +131,53 @@ public class Sign_up extends AppCompatActivity {
             public void onClick(View v) {
                 mprogressSignup.setMessage("Signing Up...");
                 mprogressSignup.show();
-                send();
+
+                if(!isPasswordValid(password_edit.getText())){
+                    password_input.setError(getString(R.string.mky_error_password));
+                }else {
+                    password_input.setError(null);
                 }
+                if(mobile_edit.getText().length() < 10){
+                    mobile_input.setError(getString(R.string.mobile_no_error));
+                }else{
+                    mobile_input.setError(null);
+                }
+                if(regd_edit.getText().length() < 8){
+                    regd_input.setError(getString(R.string.regd_error));
+                }else{
+                    regd_input.setError(null);
+                }
+                if (!TextUtils.isEmpty(regd_edit.getText().toString()) && (regd_edit.getText().length() == 8) && !TextUtils.isEmpty(name_edit.getText().toString()) &&
+                        !TextUtils.isEmpty(password_edit.getText().toString()) && !TextUtils.isEmpty(mobile_edit.getText().toString()) &&
+                        (mobile_edit.getText().length() == 10)&&
+                isPasswordValid(password_edit.getText())) {
+
+                    send();
+                }else {
+                    mprogressSignup.dismiss();
+                    Toast.makeText(Sign_up.this, "Fill all the details first", Toast.LENGTH_SHORT).show();
+                }
+
+                }
+        });
+
+        mobile_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(mobile_edit.getText().length() == 10){
+                    mobile_input.setError(null);
+                }
+                return false;
+            }
+        });
+        regd_edit.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if(regd_edit.getText().length() == 8){
+                regd_input.setError(null);
+                }
+                return false;
+            }
         });
     }
 
@@ -131,11 +188,14 @@ public class Sign_up extends AppCompatActivity {
         milkyy.setbalance("600");
         milkyy.setQuantity("10");
         String pass=password_edit.getText().toString();
+
         milkyy.setPassword(password_edit.getText().toString().trim());
         milkyy.setMobile(mobile_edit.getText().toString().trim());
         milkyy.setTrxnid("sdsh2555");
         milkyy.setHostel(h);
         databaseReference.child(milkyy.getReg()).setValue(milkyy);
+
+
 
 
         Intent intent=new Intent(Sign_up.this,HomeLayout.class);
@@ -176,5 +236,9 @@ public class Sign_up extends AppCompatActivity {
                     break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isPasswordValid(@Nullable Editable text) {
+        return text != null && text.length() >= 8;
     }
 }

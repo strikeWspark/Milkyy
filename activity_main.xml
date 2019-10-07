@@ -17,6 +17,8 @@
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="60dp"
+            android:src="@drawable/icon"
+            android:scaleType="fitCenter"
             android:background="@color/cardview_dark_background"/>
         <TextView
             android:layout_width="match_parent"
@@ -40,9 +42,10 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:background="@android:color/transparent"
-                android:textColor="@android:color/background_dark"
-                android:hint="@string/mky_hint_username"
-                android:inputType="text"/>
+                android:textColor="@android:color/background_light"
+                android:hint="@string/mky_hint_registration"
+                android:inputType="number"
+                android:maxLength="8"/>
 
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -51,7 +54,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="12dp"
-            android:padding="4dp">
+            android:padding="4dp"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/mkyy_password_edit"
@@ -59,8 +63,9 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:background="@android:color/transparent"
-                android:textColor="@android:color/background_dark"
+                android:textColor="@android:color/background_light"
                 android:hint="@string/mky_hint_password"
+
                 android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
         <RelativeLayout

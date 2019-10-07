@@ -62,7 +62,27 @@
                 android:background="@android:color/transparent"
                 android:hint="@string/mky_hint_registration"
                 android:inputType="number"
-                android:maxLines="1"/>
+                android:maxLines="1"
+                android:maxLength="8"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/mky_signup_password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:padding="4dp"
+            app:passwordToggleEnabled="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/mky_signUp_password_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:hint="@string/mky_hint_password"
+                android:maxLines="1"
+                android:inputType="textPassword" />
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -78,7 +98,8 @@
                     android:background="@android:color/transparent"
                     android:hint="@string/mky_hint_mobileno"
                     android:inputType="number"
-                    android:maxLines="1"/>
+                    android:maxLines="1"
+                    android:maxLength="10"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <RadioGroup

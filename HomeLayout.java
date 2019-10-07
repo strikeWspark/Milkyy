@@ -2,8 +2,10 @@ package com.dryfire.milkyy.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,6 +46,9 @@ public class HomeLayout  extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mky_home_layout);
+
+
+
 
         regis=getIntent().getStringExtra("reg");
 
@@ -110,13 +115,13 @@ public class HomeLayout  extends AppCompatActivity {
                 dialog = dialogBuilder.create();
                 dialog.show();
 
-                button350=(MaterialButton) findViewById(R.id.mky_pay_for_350ml_subscription);
-                button500=(MaterialButton) findViewById(R.id.mky_pay_for_500ml_subscription);
+                button350=(MaterialButton) view.findViewById(R.id.mky_pay_for_350ml_subscription);
+                button500=(MaterialButton) view.findViewById(R.id.mky_pay_for_500ml_subscription);
 
                 button500.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(getApplicationContext(),Subscription.class);
+                        Intent intent=new Intent(HomeLayout.this,Subscription.class);
                         intent.putExtra("amount",500);
                         startActivity(intent);
                     }
@@ -124,7 +129,7 @@ public class HomeLayout  extends AppCompatActivity {
                 button350.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(getApplicationContext(),Subscription.class);
+                        Intent intent=new Intent(HomeLayout.this,Subscription.class);
                         intent.putExtra("amount",350);
                         startActivity(intent);
                     }
@@ -144,7 +149,12 @@ public class HomeLayout  extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.mky_sign_out:
                 Toast.makeText(this, "SignOut clicked", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(HomeLayout.this,MainActivity.class));
+                finish();
                 break;
+
+
+
             case R.id.mky_about_us:
                 View aboutusview = getLayoutInflater().inflate(R.layout.about_us,null);
                 TextView aboutus = (TextView) aboutusview.findViewById(R.id.mky_about_us_textView);
@@ -159,4 +169,6 @@ public class HomeLayout  extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+
 }

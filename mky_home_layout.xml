@@ -26,7 +26,8 @@
         android:textSize="22sp"
         />
 
-    <RelativeLayout
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -34,9 +35,8 @@
             android:id="@+id/mky_left_days_display"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:layout_marginLeft="100dp"
-            android:padding="14dp"
             android:text="62"
             android:textSize="150dp"
             />
@@ -44,14 +44,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mky_days_left"
-            android:layout_toRightOf="@+id/mky_left_days_display"
-            android:layout_alignBottom="@+id/mky_left_days_display"
+            android:layout_toEndOf="@+id/mky_left_days_display"
             android:layout_marginBottom="25dp"
             android:textSize="18sp"
             android:textStyle="bold|italic"
             />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
     <com.google.android.material.button.MaterialButton
@@ -60,6 +59,7 @@
         android:layout_height="wrap_content"
         android:text="@string/mky_subscription"
         android:textColor="@android:color/background_dark"
-        android:layout_marginLeft="135dp"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"/>
 
 </LinearLayout>
