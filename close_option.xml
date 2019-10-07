@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Are you sure?"
+        android:textSize="22sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="12dp"
+        android:padding="4dp"
+        android:textStyle="bold"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mky_exit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="Exit"
+            android:layout_margin="12dp"
+            android:textColor="@android:color/background_dark"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/mky_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/mky_exit_button"
+            android:text="Cancel"
+            android:layout_margin="12dp"
+            android:textColor="@android:color/background_dark" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -2,14 +2,25 @@ package com.dryfire.milkyy.Activities;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.dryfire.milkyy.Milkyy.Milkyy;
 import com.dryfire.milkyy.R;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -17,15 +28,47 @@ import androidx.appcompat.widget.Toolbar;
 public class HomeLayout  extends AppCompatActivity {
 
     private MaterialButton msubscriptionButton;
-    private TextView planDescriptionTextView;
+    private TextView planDescriptionTextView,name,days_rem;
     private AlertDialog.Builder dialogBuilder,aboutusbuilder;
     private Dialog dialog,aboutusdialog;
+
+    private MaterialButton button350,button500;
+
+    private DatabaseReference databaseReference;
+    String regis;
+    String day_remaining,quantity;
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mky_home_layout);
+
+        regis=getIntent().getStringExtra("reg");
+
+        name=findViewById(R.id.mky_hello_with_name);
+        days_rem=findViewById(R.id.mky_left_days_display);
+
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("Milkyy");
+        databaseReference.child(regis).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                Milkyy milkyy=dataSnapshot.getValue(Milkyy.class);
+                name.setText(milkyy.getName());
+                day_remaining=milkyy.getbalance();
+                int a=Integer.parseInt(day_remaining)/1;
+                days_rem.setText(String.valueOf(a));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
 
         Toolbar home_toolbar = findViewById(R.id.mky_Home_toolbar);
         setSupportActionBar(home_toolbar);
@@ -67,6 +110,25 @@ public class HomeLayout  extends AppCompatActivity {
                 dialog = dialogBuilder.create();
                 dialog.show();
 
+                button350=(MaterialButton) findViewById(R.id.mky_pay_for_350ml_subscription);
+                button500=(MaterialButton) findViewById(R.id.mky_pay_for_500ml_subscription);
+
+                button500.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(getApplicationContext(),Subscription.class);
+                        intent.putExtra("amount",500);
+                        startActivity(intent);
+                    }
+                });
+                button350.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(getApplicationContext(),Subscription.class);
+                        intent.putExtra("amount",350);
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }
@@ -86,31 +148,7 @@ public class HomeLayout  extends AppCompatActivity {
             case R.id.mky_about_us:
                 View aboutusview = getLayoutInflater().inflate(R.layout.about_us,null);
                 TextView aboutus = (TextView) aboutusview.findViewById(R.id.mky_about_us_textView);
-                aboutus.setText("Heap - \n" +
-                        "\tA heap is a speacial Tree-based data structure in which the tree is a complete binary tree. Generally Heaps can be of two types :\n" +
-                        "a) Min Heap\n" +
-                        "b) Max Heap\n" +
-                        "\n" +
-                        "Min Heap - \n" +
-                        "In a Mix Heap the key present at the root node must be minimum among the keys present at all of it's chlidren. The same proeprty must be recursively true for all sub-trees in that binary tree.\n" +
-                        "\n" +
-                        "Max Heap - \n" +
-                        "In a Ma Heap the key present at the root node must be maximum among the keys present at all of it's children. The same property must be recursively true for all sub-trees in that binary tree.\n" +
-                        "\n" +
-                        "\n" +
-                        "Min Heap\t\n" +
-                        "\t\t\t\t1\n" +
-                        "\t\t\t       / \\\n" +
-                        "\t\t\t      3   4\n" +
-                        "\t\t\t     / \\  / \\\n" +
-                        "\t\t\t    5  6 7   8\n" +
-                        "\n" +
-                        "Max Heap\n" +
-                        "\t\t\t\t8\n" +
-                        "\t\t\t       / \\\n" +
-                        "\t\t\t      7\t  6\n" +
-                        "\t\t\t     / \\  / \n" +
-                        "\t\t\t    3   2 1");
+                aboutus.setText("Free pure milk delivery in LPU at your hostel gates. With Milkyy, you can fulfil all your dialy essential quality milk needs");
                 aboutusbuilder.setView(aboutusview);
                 aboutusdialog = aboutusbuilder.create();
                 aboutusdialog.show();
