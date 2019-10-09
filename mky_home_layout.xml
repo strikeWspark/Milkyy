@@ -37,7 +37,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="100dp"
-            android:text="62"
             android:textSize="150dp"
             />
         <TextView

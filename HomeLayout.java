@@ -61,9 +61,9 @@ public class HomeLayout  extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 Milkyy milkyy=dataSnapshot.getValue(Milkyy.class);
-                name.setText(milkyy.getName());
+                name.setText("Hello "+ milkyy.getName());
                 day_remaining=milkyy.getbalance();
-                int a=Integer.parseInt(day_remaining)/1;
+                int a=Integer.parseInt(day_remaining)/100;
                 days_rem.setText(String.valueOf(a));
             }
 
@@ -122,7 +122,8 @@ public class HomeLayout  extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(HomeLayout.this,Subscription.class);
-                        intent.putExtra("amount",500);
+                        String am500="1";
+                        intent.putExtra("amt","500");
                         startActivity(intent);
                     }
                 });
@@ -130,7 +131,8 @@ public class HomeLayout  extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(HomeLayout.this,Subscription.class);
-                        intent.putExtra("amount",350);
+                        String am350="2";
+                        intent.putExtra("amt","305");
                         startActivity(intent);
                     }
                 });

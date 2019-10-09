@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dryfire.milkyy.R;
@@ -22,7 +23,8 @@ import java.util.ArrayList;
 public class Subscription extends AppCompatActivity {
 
     Button send;
-    TextInputEditText noteEt;
+    TextInputEditText noteEt,amountET;
+    //TextView amountEt;
     final int UPI_PAYMENT = 0;
     String am;
 
@@ -31,28 +33,29 @@ public class Subscription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_subscription);
 
-        initializeViews();
 
-        am=getIntent().getStringExtra("amount");
+
+        send = findViewById(R.id.send);
+        noteEt = findViewById(R.id.note);
+
+        am=getIntent().getStringExtra("amt");
+        //System.out.println("Amount:: "+ am);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //Getting the values from the EditTexts
-                String amount = am;
+                String amount=am;
                 String note = noteEt.getText().toString();
-                String name = "Maanvendra Prajapati";
-                String upiId = "";
+                String name = "Maanvendra";
+                String upiId = "anuragrohikar@okhdfcbank";
                 payUsingUpi(amount, upiId, name, note);
             }
         });
     }
 
-    void initializeViews() {
-        send = findViewById(R.id.send);
-        noteEt = findViewById(R.id.note);
-        String note = noteEt.getText().toString();
-    }
+
+
     void payUsingUpi(String amount, String upiId, String name, String note) {
 
         Uri uri = Uri.parse("upi://pay").buildUpon()
@@ -62,7 +65,6 @@ public class Subscription extends AppCompatActivity {
                 .appendQueryParameter("am", amount)
                 .appendQueryParameter("cu", "INR")
                 .build();
-
 
         Intent upiPayIntent = new Intent(Intent.ACTION_VIEW);
         upiPayIntent.setData(uri);

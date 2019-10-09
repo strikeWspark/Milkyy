@@ -151,8 +151,11 @@ public class Sign_up extends AppCompatActivity {
                         !TextUtils.isEmpty(password_edit.getText().toString()) && !TextUtils.isEmpty(mobile_edit.getText().toString()) &&
                         (mobile_edit.getText().length() == 10)&&
                 isPasswordValid(password_edit.getText())) {
-
-                    send();
+                    try {
+                        send();
+                    }catch (Exception e){
+                        Toast.makeText(Sign_up.this,"Something went wrong Please try again..",Toast.LENGTH_LONG).show();
+                    }
                 }else {
                     mprogressSignup.dismiss();
                     Toast.makeText(Sign_up.this, "Fill all the details first", Toast.LENGTH_SHORT).show();

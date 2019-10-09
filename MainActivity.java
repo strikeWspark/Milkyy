@@ -63,77 +63,82 @@ public class MainActivity extends AppCompatActivity {
         nextButton = (MaterialButton) findViewById(R.id.mky_next_button);
         signUpButton = (MaterialButton) findViewById(R.id.mky_signup_button);
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        try {
 
-                if(!TextUtils.isEmpty(usernameEdit.getText().toString()) && !TextUtils.isEmpty(passwordEdit.getText().toString())){
-                    mprogressdialog.setMessage("Signing In...");
-                    mprogressdialog.show();
-                    if (!isPasswordValid(passwordEdit.getText())) {
-                        passwordInput.setError(getString(R.string.mky_error_password));
-                    } else {
-                        passwordInput.setError(null);
-                        usernameInput.setError(null);
+            nextButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                        System.out.println(usernameEdit.getText().toString().trim());
-                        System.out.println(passwordEdit.getText().toString().trim());
-                        final Intent intent=new Intent(MainActivity.this,HomeLayout.class);
-                        intent.putExtra("reg",usernameEdit.getText().toString().trim());
+                    if (!TextUtils.isEmpty(usernameEdit.getText().toString()) && !TextUtils.isEmpty(passwordEdit.getText().toString())) {
+                        mprogressdialog.setMessage("Signing In...");
+                        mprogressdialog.show();
+                        if (!isPasswordValid(passwordEdit.getText())) {
+                            passwordInput.setError(getString(R.string.mky_error_password));
+                        } else {
+                            passwordInput.setError(null);
+                            usernameInput.setError(null);
+
+                            System.out.println(usernameEdit.getText().toString().trim());
+                            System.out.println(passwordEdit.getText().toString().trim());
+                            final Intent intent = new Intent(MainActivity.this, HomeLayout.class);
+                            intent.putExtra("reg", usernameEdit.getText().toString().trim());
 
 
-                        dreff=FirebaseDatabase.getInstance().getReference().child("Milkyy");
-                        dreff.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                for(DataSnapshot dsp: dataSnapshot.getChildren()){
-                                    String m=dsp.getKey();
-                                    System.out.println("Key from firebase"+m);
-                                    Log.d("Firebase Values: Key = ",m);
-                                    mreff=FirebaseDatabase.getInstance().getReference().child("Milkyy").child(m);
-                                    mreff.addValueEventListener(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            String retreg=dataSnapshot.child("reg").getValue().toString();
-                                            String retpass=dataSnapshot.child("password").getValue().toString();
+                            dreff = FirebaseDatabase.getInstance().getReference().child("Milkyy");
+                            dreff.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot dsp : dataSnapshot.getChildren()) {
+                                        String m = dsp.getKey();
+                                        System.out.println("Key from firebase" + m);
+                                        Log.d("Firebase Values: Key = ", m);
+                                        mreff = FirebaseDatabase.getInstance().getReference().child("Milkyy").child(m);
+                                        mreff.addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                String retreg = dataSnapshot.child("reg").getValue().toString();
+                                                String retpass = dataSnapshot.child("password").getValue().toString();
 
-                                            System.out.println(retreg + ", " + retpass);
-                                            if(retreg.equals(usernameEdit.getText().toString().trim()) && retpass.equals(passwordEdit.getText().toString().trim())) {
-                                                startActivity(intent);
-                                                mprogressdialog.dismiss();
-                                                finish();
+                                                System.out.println(retreg + ", " + retpass);
+                                                if (retreg.equals(usernameEdit.getText().toString().trim()) && retpass.equals(passwordEdit.getText().toString().trim())) {
+                                                    startActivity(intent);
+                                                    mprogressdialog.dismiss();
+                                                    finish();
+                                                } else {
+                                                    Toast.makeText(MainActivity.this, "Invalid username and password", Toast.LENGTH_LONG).show();
+                                                }
+
                                             }
-                                            else{
-                                                Toast.makeText(MainActivity.this,"Invalid username ad password",Toast.LENGTH_LONG).show();
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
                                             }
-
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                        }
-                                    });
+                                        });
+                                    }
                                 }
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
+                                }
+                            });
 
 //                    startActivity(new Intent(MainActivity.this, HomeLayout.class));
 //                    finish();
+                        }
+                    } else {
+                        usernameInput.setError("Please fill the Registration no.");
+                        passwordInput.setError("Please fil the Password");
+                        Toast.makeText(MainActivity.this, "Fill the details first", Toast.LENGTH_LONG).show();
                     }
-                }else{
-                    usernameInput.setError("Please fill the Registration no.");
-                    passwordInput.setError("Please fil the Password");
-                    Toast.makeText(MainActivity.this, "Fill the details first", Toast.LENGTH_LONG).show();
-                }
                 }
 
-        });
+            });
+        }
+        catch (Exception e){
+            Toast.makeText(MainActivity.this,"Something went wrong. Please check your Internet...",Toast.LENGTH_LONG).show();
+        }
 
         passwordEdit.setOnKeyListener(new View.OnKeyListener() {
             @Override
